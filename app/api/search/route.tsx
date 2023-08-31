@@ -1,7 +1,7 @@
 import { prisma } from "@/utils/prisma";
-import { NextRequest } from "next/server";
 
-export const GET = async (req: NextRequest) => {
+export const revalidate = 0;
+export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url);
 
     const prompts = await prisma.prompts.findMany({

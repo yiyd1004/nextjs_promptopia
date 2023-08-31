@@ -1,8 +1,9 @@
 import { prisma } from "@/utils/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
+export const revalidate = 0;
 export const GET = async (
-    req: NextRequest,
+    req: Request,
     { params }: { params: { id: string } }
 ) => {
     try {
@@ -31,7 +32,7 @@ export const GET = async (
 };
 
 export const PATCH = async (
-    req: NextRequest,
+    req: Request,
     { params }: { params: { id: string } }
 ) => {
     const data = await req.json();
@@ -63,7 +64,7 @@ export const PATCH = async (
 };
 
 export const DELETE = async (
-    req: NextRequest,
+    req: Request,
     { params }: { params: { id: string } }
 ) => {
     try {

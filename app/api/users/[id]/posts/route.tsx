@@ -1,8 +1,9 @@
 import { prisma } from "@/utils/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
+export const revalidate = 0;
 export const GET = async (
-    req: NextRequest,
+    req: Request,
     { params }: { params: { id: string } }
 ) => {
     try {
@@ -14,6 +15,7 @@ export const GET = async (
                 creator: true,
             },
         });
+
         // await new Promise((resolve) => setTimeout(resolve, 2000));
         return NextResponse.json({ data: prompts }, { status: 200 });
     } catch (error) {

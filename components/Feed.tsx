@@ -41,6 +41,7 @@ const Feed = () => {
         setLoading(true);
         const res = await fetch(`/api/search?q=${searchText}`, {
             cache: "no-store",
+            next: { revalidate: 0 },
         });
         const data = await res.json();
 
@@ -61,10 +62,13 @@ const Feed = () => {
     };
 
     useEffect(() => {
-        (async () => {
+        const getPrompts = async () => {
             setLoading(true);
 
-            const res = await fetch("/api/prompt", { cache: "no-store" });
+            const res = await fetch("/api/prompt", {
+                cache: "no-store",
+                next: { revalidate: 0 },
+            });
             const data = await res.json();
 
             if (res.ok) {
@@ -72,8 +76,10 @@ const Feed = () => {
             } else {
                 setPosts([]);
             }
+
             setLoading(false);
-        })();
+        };
+        getPrompts();
     }, []);
 
     return (

@@ -3,7 +3,10 @@ import { PromptCardType } from "./PromptCard.type";
 
 const fetchPosts = async (id: string): Promise<PromptCardType[]> => {
     const url = `/api/users/${id}/posts`;
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(url, {
+        cache: "no-store",
+        next: { revalidate: 0 },
+    });
     const post = await res.json();
     if (res.ok) {
         return post.data;

@@ -27,6 +27,8 @@ const CreatePrompt = () => {
                     userId: session?.user?.id,
                     tag: post.tag,
                 }),
+                cache: "no-store",
+                next: { revalidate: 0 },
             });
 
             if (response.ok) {

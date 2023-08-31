@@ -1,8 +1,9 @@
 import { prisma } from "@/utils/prisma";
 import bcrypt from "bcryptjs";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const POST = async (req: NextRequest) => {
+export const revalidate = 0;
+export const POST = async (req: Request) => {
     const data = await req.json();
 
     if (!data.email || !data.email || !data.name) {

@@ -24,6 +24,7 @@ const MyProfile = () => {
                 await fetch(`/api/prompt/${post.id}`, {
                     method: "DELETE",
                     cache: "no-store",
+                    next: { revalidate: 0 },
                 });
                 router.refresh();
             } catch (error) {

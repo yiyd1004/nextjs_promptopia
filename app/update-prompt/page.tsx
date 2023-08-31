@@ -19,6 +19,7 @@ const EditPrompt = () => {
         const getPromptDetails = async () => {
             const res = await fetch(`/api/prompt/${promptId}`, {
                 cache: "no-store",
+                next: { revalidate: 0 },
             });
             const data = await res.json();
 
@@ -45,6 +46,7 @@ const EditPrompt = () => {
                     tag: post.tag,
                 }),
                 cache: "no-store",
+                next: { revalidate: 0 },
             });
 
             if (response.ok) {

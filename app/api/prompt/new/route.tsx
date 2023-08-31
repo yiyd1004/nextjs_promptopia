@@ -1,7 +1,8 @@
 import { prisma } from "@/utils/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const POST = async (req: NextRequest) => {
+export const revalidate = 0;
+export const POST = async (req: Request) => {
     const data = await req.json();
 
     try {

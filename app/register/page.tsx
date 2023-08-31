@@ -21,6 +21,7 @@ const Register = () => {
             method: "POST",
             body: JSON.stringify(data),
             cache: "no-store",
+            next: { revalidate: 0 },
         });
 
         if (res.ok) {
