@@ -1,5 +1,6 @@
 import { prisma } from "@/utils/prisma";
 
+export const runtime = "edge";
 export const revalidate = 0;
 export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url);

@@ -2,6 +2,7 @@ import { prisma } from "@/utils/prisma";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
+export const runtime = "edge";
 export const revalidate = 0;
 export const POST = async (req: Request) => {
     const data = await req.json();
