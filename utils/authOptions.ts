@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { AuthOptions } from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./prisma";
@@ -10,7 +10,7 @@ type CustomProfile = {
     picture?: string;
 };
 
-export const authOptions: AuthOptions = {
+export const authOption: AuthOptions = {
     providers: [
         CredentialsProvider({
             name: "email",
@@ -33,7 +33,7 @@ export const authOptions: AuthOptions = {
 
                 const user = await prisma.users.findUnique({
                     where: {
-                        email: credentials.email,
+                        email: credentials.email.toString(),
                     },
                 });
 
@@ -43,7 +43,7 @@ export const authOptions: AuthOptions = {
 
                 // check password
                 const passMatch = await bcrypt.compare(
-                    credentials.password,
+                    credentials.password.toString(),
                     user.password
                 );
                 if (!passMatch) {
@@ -82,7 +82,9 @@ export const authOptions: AuthOptions = {
                 },
             });
 
-            session.user.id = sessionUser?.id.toString();
+            if (sessionUser) {
+                session.user.id = sessionUser.id.toString();
+            }
 
             // return session;
             return {
@@ -127,3 +129,5 @@ export const authOptions: AuthOptions = {
     },
     debug: process.env.NODE_ENV === "development",
 };
+
+export const handlers = NextAuth(authOption);
