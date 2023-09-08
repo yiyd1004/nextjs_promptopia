@@ -32,7 +32,7 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_URL_INTERNAL=http://localhost:3000
 NEXTAUTH_SECRET=YOUR_STRONG_SECRET
 ```
-2. Use the following command to run the app in your localhost.
+3. Use the following command to run the app in your localhost.
  ```shell
   npm run dev
   # or
