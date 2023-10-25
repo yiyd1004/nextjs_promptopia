@@ -14,7 +14,7 @@ export const config = {
 
 export async function middleware(request: NextRequest, response: NextResponse) {
     const session = await getToken({ req: request });
-
+    console.log(session, request.nextUrl.pathname);
     if (
         !session &&
         ((request.nextUrl.pathname.startsWith("/api/") &&
