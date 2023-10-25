@@ -1,7 +1,5 @@
-import { getServerSession } from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
-import { authOption } from "./utils/authOptions";
 
 export const config = {
     matcher: [
@@ -14,20 +12,19 @@ export const config = {
     ],
 };
 
-export async function middleware(request: NextRequest, response: NextResponse) {
-    const session = await getToken({ req: request });
-    const temp = await getServerSession(authOption);
-    console.log(session, temp, request.nextUrl.pathname);
+export async function middleware(req: NextRequest, res: NextResponse) {
+    const session = await getToken({ req });
+    console.log(session, req.nextUrl.pathname);
     if (
         !session &&
-        ((request.nextUrl.pathname.startsWith("/api/") &&
-            request.nextUrl.pathname !== "/api/prompt") ||
-            request.nextUrl.pathname === "/create-prompt" ||
-            request.nextUrl.pathname === "/update-prompt" ||
-            request.nextUrl.pathname.startsWith("/profile"))
+        ((req.nextUrl.pathname.startsWith("/api/") &&
+            req.nextUrl.pathname !== "/api/prompt") ||
+            req.nextUrl.pathname === "/create-prompt" ||
+            req.nextUrl.pathname === "/update-prompt" ||
+            req.nextUrl.pathname.startsWith("/profile"))
     ) {
-        return NextResponse.redirect(new URL("/signin", request.url));
-    } else if (session && request.nextUrl.pathname === "/signin") {
-        return NextResponse.redirect(new URL("/profile", request.url));
+        return NextResponse.redirect(new URL("/signin", req.url));
+    } else if (session && req.nextUrl.pathname === "/signin") {
+        return NextResponse.redirect(new URL("/profile", req.url));
     }
 }
