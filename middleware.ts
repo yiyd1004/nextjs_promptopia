@@ -1,5 +1,7 @@
+import { getServerSession } from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
+import { authOption } from "./utils/authOptions";
 
 export const config = {
     matcher: [
@@ -14,7 +16,8 @@ export const config = {
 
 export async function middleware(request: NextRequest, response: NextResponse) {
     const session = await getToken({ req: request });
-    console.log(session, request.nextUrl.pathname);
+    const temp = await getServerSession(authOption);
+    console.log(session, temp, request.nextUrl.pathname);
     if (
         !session &&
         ((request.nextUrl.pathname.startsWith("/api/") &&
