@@ -2,10 +2,7 @@
 
 This project is to study font-end development using NextJS, Next-Auth, Tailwindcss, Prisma (MongoDB), and TypeScript.
 
-This project is referenced from <a href="https://www.youtube.com/watch?v=wm5gMKuwSYk&ab_channel=JavaScriptMastery">This tutorial</a> and 
-added/modified features such as credential login, access MongoDB using Prisma, and coding with TypeScript instead of JavaScript. 
-
-### <a href="https://nextjs-promptopia.onrender.com/" target="_blank" style="font-size: 30px;">Demo</a>
+### <a href="https://promptopia-yongyim.vercel.app/" target="_blank" style="font-size: 30px;">Demo</a>
 
 ## Main Packages
 - next: ^13.4.19
